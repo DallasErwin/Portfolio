@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dallas Erwin - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #10131a;
+      color: #e6e6e6;
+      min-height: 100vh;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      background: #181c25;
+      height: 60px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .navbar .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #4f8cff;
+      letter-spacing: 1px;
+    }
+    .navbar nav a {
+      color: #e6e6e6;
+      text-decoration: none;
+      margin: 0 16px;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .navbar nav a:hover, .navbar nav a.active {
+      color: #4f8cff;
+    }
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px 40px 20px;
+      background: radial-gradient(ellipse at 60% 40%, #23263a 60%, #10131a 100%);
+      min-height: 400px;
+    }
+    .hero-content {
+      flex: 1 1 320px;
+      max-width: 500px;
+      margin-right: 40px;
+    }
+    .hero-content h1 {
+      font-size: 2.7rem;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      color: #fff;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+      color: #b3b3b3;
+    }
+    .hero-buttons a {
+      display: inline-block;
+      margin-right: 12px;
+      margin-bottom: 8px;
+      padding: 10px 24px;
+      background: #4f8cff;
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(79,140,255,0.15);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .hero-buttons a:hover {
+      background: #1e90ff;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(79,140,255,0.25);
+    }
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 16px;
+      background: #23263a;
+      object-fit: cover;
+      margin: 0 0 0 40px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    }
+    .section {
+      max-width: 1100px;
+      margin: 48px auto;
+      background: #181c25;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      padding: 40px 32px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .section.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #4f8cff;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .about-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .about-card {
+      background: #23263a;
+      border-radius: 10px;
+      padding: 18px 24px;
+      flex: 1 1 180px;
+      min-width: 180px;
+      color: #e6e6e6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      margin-bottom: 8px;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .project-card {
+      background: #23263a;
+      border-radius: 10px;
+      padding: 20px 18px;
+      color: #e6e6e6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+    }
+    .project-card h3 {
+      margin: 0 0 8px 0;
+      color: #4f8cff;
+      font-size: 1.2rem;
+    }
+    .project-card p {
+      flex: 1;
+      color: #b3b3b3;
+      font-size: 1rem;
+    }
+    .project-links a {
+      color: #4f8cff;
+      text-decoration: none;
+      margin-right: 12px;
+      font-size: 0.98rem;
+      transition: color 0.2s;
+    }
+    .project-links a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .skill-card {
+      background: #23263a;
+      border-radius: 10px;
+      padding: 18px 20px;
+      color: #e6e6e6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .skill-card .skill-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #4f8cff;
+    }
+    .skill-bar {
+      width: 100%;
+      height: 6px;
+      background: #181c25;
+      border-radius: 3px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4f8cff 60%, #1e90ff 100%);
+      border-radius: 3px;
+    }
+    .contact-info {
+      margin-top: 16px;
+      font-size: 1.1rem;
+    }
+    .contact-info a {
+      color: #4f8cff;
+      text-decoration: none;
+      margin-right: 16px;
+      transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .contact-info a:hover {
+      color: #fff;
+      background: #4f8cff;
+      box-shadow: 0 2px 8px rgba(79,140,255,0.15);
+      text-decoration: underline;
+    }
+    .footer {
+      text-align: center;
+      color: #b3b3b3;
+      padding: 32px 0 16px 0;
+      font-size: 1rem;
+      margin-top: 48px;
+    }
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        padding: 60px 10px 30px 10px;
+      }
+      .hero-content {
+        margin-right: 0;
+        margin-bottom: 32px;
+      }
+      .profile-pic {
+        margin: 0;
+      }
+      .section {
+        padding: 24px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">Dallas Erwin</div>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+  <div class="hero" id="home">
+    <div class="hero-content">
+      <h1>Hello, I'm <span style="color:#4f8cff">Dallas Erwin</span></h1>
+      <p>I'm a high school student passionate about web development and technology. Welcome to my portfolio!</p>
+      <div class="hero-buttons">
+        <a href="#contact">Contact Me</a>
+        <a href="#projects">View My Work</a>
+      </div>
+    </div>
+    <img src="c:\Users\Dallas\Pictures\Camera Roll\WIN_20250626_19_24_46_Pro.jpg" alt="Profile" class="profile-pic" />
+  </div>
+  <div class="section" id="about">
+    <h2>About Me</h2>
+    <div class="about-cards">
+      <div class="about-card"><strong>Education</strong><br>High School Student</div>
+      <div class="about-card"><strong>Location</strong><br>Dallas, Texas</div>
+      <div class="about-card"><strong>Experience</strong><br>Learning Web Development</div>
+      <div class="about-card"><strong>Languages</strong><br>English, Spanish</div>
+    </div>
+    <p style="margin-top:24px;">I am currently learning web development and programming. I have a passion for technology and love to create new things.</p>
+  </div>
+  <div class="section" id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Personal Portfolio</h3>
+        <p>A modern, responsive portfolio website to showcase my work and skills.</p>
+        <div class="project-links">
+          <a href="#">Live Demo</a>
+          <a href="#">Source Code</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Weather App</h3>
+        <p>A simple weather app that displays current weather information for any city.</p>
+        <div class="project-links">
+          <a href="#">Live Demo</a>
+          <a href="#">Source Code</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Task Tracker</h3>
+        <p>A web app to manage daily tasks and boost productivity.</p>
+        <div class="project-links">
+          <a href="#">Live Demo</a>
+          <a href="#">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">HTML</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">CSS</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">JavaScript</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">React</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-info">
+      <div>Email: <a href="mailto:Dallasrayerwin22@gmail.com">Dallasrayerwin22@gmail.com</a></div>
+      <div>LinkedIn: <a href="https://www.linkedin.com/in/dallas-erwin/" target="_blank">linkedin.com/in/dallas-erwin/</a></div>
+    </div>
+  </div>
+  <div class="footer">
+    Dallas Erwin &mdash; &copy; 2025. All rights reserved.
+  </div>
+  <script>
+    // Scroll animation for sections
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.section');
+      const observer = new window.IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>
